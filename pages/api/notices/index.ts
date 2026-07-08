@@ -4,7 +4,7 @@ import { validateNotice } from "@/lib/validation";
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
 ) {
   switch (req.method) {
     case "GET":
@@ -12,7 +12,11 @@ export default async function handler(
         const notices = await getAllNotices();
         return res.status(200).json(notices);
       } catch (error) {
-        return res.status(500).json({ message: "Internal Server Error" });
+        console.error(error);
+
+        return res.status(500).json({
+          error: String(error),
+        });
       }
 
     case "POST":
@@ -45,5 +49,3 @@ export default async function handler(
       });
   }
 }
-
-
