@@ -37,3 +37,22 @@ export const getNoticeById = async (id: string) => {
   });
 };
 
+export const updateNotice = async (
+  id: string,
+  data: CreateNoticeInput
+) => {
+  return prisma.notice.update({
+    where: {
+      id,
+    },
+    data,
+  });
+};
+
+export const deleteNotice = async (id: string) => {
+  return prisma.notice.delete({
+    where: {
+      id,
+    },
+  });
+};
