@@ -28,3 +28,12 @@ export const createNotice = async (data: CreateNoticeInput) => {
     data,
   });
 };
+
+export const getNoticeById = async (id: string) => {
+  return prisma.notice.findUnique({
+    where: {
+      id,
+    },
+  });
+};
+
