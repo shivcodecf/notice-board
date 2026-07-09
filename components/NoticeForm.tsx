@@ -3,12 +3,19 @@ import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import {
-  NoticeFormData,
-  noticeSchema,
-} from "@/lib/noticeSchema";
+import { NoticeFormData, noticeSchema } from "@/lib/noticeSchema";
 
-export default function NoticeForm() {
+interface NoticeFormProps {
+  initialData?: NoticeFormData;
+  isEdit?: boolean;
+  noticeId?: string;
+}
+
+export default function NoticeForm({
+  initialData,
+  isEdit = false,
+  noticeId,
+}: NoticeFormProps) {
   const router = useRouter();
 
   const {
@@ -17,15 +24,22 @@ export default function NoticeForm() {
     formState: { errors, isSubmitting },
   } = useForm<NoticeFormData>({
     resolver: zodResolver(noticeSchema),
-    defaultValues: {
+    defaultValues: initialData || {
+      title: "",
+      body: "",
       category: "GENERAL",
       priority: "NORMAL",
+      publishDate: "",
     },
   });
 
   const onSubmit = async (data: NoticeFormData) => {
     try {
-      await axios.post("/api/notices", data);
+      if (isEdit) {
+        await axios.put(`/api/notices/${noticeId}`, data);
+      } else {
+        await axios.post("/api/notices", data);
+      }
 
       await router.push("/");
     } catch (error) {
@@ -37,19 +51,14 @@ export default function NoticeForm() {
   return (
     <div className="max-w-2xl mx-auto bg-white rounded-xl shadow-lg p-8">
       <h1 className="text-3xl font-bold mb-8 text-gray-900">
-        Add Notice
+        {isEdit ? "Edit Notice" : "Add Notice"}
       </h1>
 
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="space-y-6"
-      >
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         {/* Title */}
 
         <div>
-          <label className="block mb-2 font-medium text-gray-700">
-            Title
-          </label>
+          <label className="block mb-2 font-medium text-gray-700">Title</label>
 
           <input
             {...register("title")}
@@ -59,18 +68,14 @@ export default function NoticeForm() {
           />
 
           {errors.title && (
-            <p className="text-red-500 text-sm mt-1">
-              {errors.title.message}
-            </p>
+            <p className="text-red-500 text-sm mt-1">{errors.title.message}</p>
           )}
         </div>
 
         {/* Body */}
 
         <div>
-          <label className="block mb-2 font-medium text-gray-700">
-            Body
-          </label>
+          <label className="block mb-2 font-medium text-gray-700">Body</label>
 
           <textarea
             {...register("body")}
@@ -80,9 +85,7 @@ export default function NoticeForm() {
           />
 
           {errors.body && (
-            <p className="text-red-500 text-sm mt-1">
-              {errors.body.message}
-            </p>
+            <p className="text-red-500 text-sm mt-1">{errors.body.message}</p>
           )}
         </div>
 
@@ -167,7 +170,11 @@ export default function NoticeForm() {
             disabled={isSubmitting}
             className="px-5 py-3 rounded-lg bg-blue-600 text-white hover:bg-blue-700 disabled:bg-gray-400 transition"
           >
-            {isSubmitting ? "Saving..." : "Save Notice"}
+            {isSubmitting
+              ? "Saving..."
+              : isEdit
+                ? "Update Notice"
+                : "Save Notice"}
           </button>
         </div>
       </form>
