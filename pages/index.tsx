@@ -3,10 +3,16 @@ import { useEffect, useState } from "react";
 import NoticeCard from "@/components/NoticeCard";
 import { Notice } from "@/types/notice";
 import Link from "next/link";
+import DeleteModal from "@/components/DeleteModal";
+import toast from "react-hot-toast";
 
 export default function Home() {
   const [notices, setNotices] = useState<Notice[]>([]);
   const [loading, setLoading] = useState(true);
+  const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+  const [deleteLoading, setDeleteLoading] = useState(false);
+
+  const [selectedNotice, setSelectedNotice] = useState<Notice | null>(null);
 
   useEffect(() => {
     fetchNotices();
@@ -22,6 +28,32 @@ export default function Home() {
       setLoading(false);
     }
   };
+
+  const handleDelete = async () => {
+  if (!selectedNotice) return;
+
+  try {
+    setDeleteLoading(true);
+
+    await axios.delete(`/api/notices/${selectedNotice.id}`);
+
+    setNotices((prev) =>
+      prev.filter(
+        (notice) => notice.id !== selectedNotice.id
+      )
+    );
+
+    toast.success("Notice deleted successfully");
+
+    setIsDeleteOpen(false);
+    setSelectedNotice(null);
+  } catch (error) {
+    console.error(error);
+    toast.error("Failed to delete notice");
+  } finally {
+    setDeleteLoading(false);
+  }
+};
 
   if (loading) {
     return (
@@ -60,11 +92,29 @@ export default function Home() {
         ) : (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {notices.map((notice) => (
-              <NoticeCard key={notice.id} notice={notice} />
+              <NoticeCard
+                key={notice.id}
+                notice={notice}
+                onDelete={(notice) => {
+                  setSelectedNotice(notice);
+                  setIsDeleteOpen(true);
+                }}
+              />
             ))}
           </div>
         )}
       </div>
+
+      <DeleteModal
+  open={isDeleteOpen}
+  title={selectedNotice?.title || ""}
+  loading={deleteLoading}
+  onClose={() => {
+    setIsDeleteOpen(false);
+    setSelectedNotice(null);
+  }}
+  onDelete={handleDelete}
+/>
     </div>
   );
 }

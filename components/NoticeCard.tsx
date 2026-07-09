@@ -8,9 +8,10 @@ import {
 
 interface Props {
   notice: Notice;
+  onDelete: (notice: Notice) => void;
 }
 
-export default function NoticeCard({ notice }: Props) {
+export default function NoticeCard({ notice, onDelete }: Props) {
   return (
     <div
       className="
@@ -68,16 +69,17 @@ export default function NoticeCard({ notice }: Props) {
         </Link>
 
         <button
+          onClick={() => onDelete(notice)}
           className="
-          flex-1
-          py-3
-          hover:bg-red-50
-          text-red-500
-          flex
-          justify-center
-          items-center
-          gap-2
-          "
+  flex-1
+  py-3
+  hover:bg-red-50
+  text-red-500
+  flex
+  justify-center
+  items-center
+  gap-2
+  "
         >
           <TrashIcon className="h-5 w-5" />
           Delete
