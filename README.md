@@ -8,7 +8,7 @@ The application allows administrators to create, update, delete, and manage noti
 
 ## 🚀 Live Demo
 
-**Frontend:** https://your-vercel-url.vercel.app
+**Frontend:** https://notice-board-rkhvah7yx-shivcodecfs-projects.vercel.app
 
 ---
 
@@ -160,7 +160,7 @@ DELETE /api/notices/:id
 Clone the repository
 
 ```bash
-git clone https://github.com/your-username/notice-board.git
+git clone https://github.com/shivcodecf/notice-board
 ```
 
 Move into the project
@@ -212,6 +212,17 @@ Server-side validation is performed before creating or updating notices.
 
 ---
 
+
+### Deployment Notes
+
+- The application is deployed on Vercel.
+- Supabase Session Pooler is used for the production `DATABASE_URL` to ensure efficient and reliable database connections in a serverless environment.
+
+
+---
+
+
+
 # 🎨 UI Highlights
 
 - Responsive Layout
@@ -237,14 +248,27 @@ Server-side validation is performed before creating or updating notices.
 
 # 📸 Screenshots
 
-Add screenshots here after deployment.
+## Home Page
 
-Example:
+c:\Users\shivam\AppData\Local\Packages\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\TempState\ScreenClip\{EF5E330B-0ED2-444F-9316-E6C9EFCD5CAD}.png
 
-- Home Page
-- Add Notice
-- Edit Notice
-- Delete Confirmation
+---
+
+## Add Notice
+
+![Add Notice](./screenshots/add-notice.png)
+
+---
+
+## Edit Notice
+
+![Edit Notice](./screenshots/edit-notice.png)
+
+---
+
+## Delete Confirmation
+
+![Delete Modal](./screenshots/delete-modal.png)
 
 ---
 
