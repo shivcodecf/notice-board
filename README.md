@@ -1,40 +1,257 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# 📌 Notice Board
 
-## Getting Started
+A modern Notice Board application built with **Next.js, TypeScript, Prisma, Supabase, Tailwind CSS, React Hook Form, and Zod**.
 
-First, run the development server:
+The application allows administrators to create, update, delete, and manage notices with a clean and responsive interface.
+
+---
+
+## 🚀 Live Demo
+
+**Frontend:** https://your-vercel-url.vercel.app
+
+---
+
+## 📂 GitHub Repository
+
+https://github.com/your-username/notice-board
+
+---
+
+# ✨ Features
+
+- ✅ Create Notice
+- ✅ View All Notices
+- ✅ Edit Notice
+- ✅ Delete Notice
+- ✅ Delete Confirmation Modal
+- ✅ Responsive UI
+- ✅ Form Validation using Zod
+- ✅ React Hook Form Integration
+- ✅ Toast Notifications
+- ✅ Loading States
+- ✅ Reusable Components
+- ✅ Prisma ORM
+- ✅ Supabase PostgreSQL Database
+
+---
+
+# 🛠 Tech Stack
+
+### Frontend
+
+- Next.js (Pages Router)
+- React
+- TypeScript
+- Tailwind CSS
+- Axios
+- React Hook Form
+- Zod
+- React Hot Toast
+
+### Backend
+
+- Next.js API Routes
+- Prisma ORM
+- Supabase PostgreSQL
+
+---
+
+# 📁 Folder Structure
+
+```
+.
+├── components
+│   ├── DeleteModal.tsx
+│   ├── NoticeCard.tsx
+│   ├── NoticeForm.tsx
+│   └── SkeletonCard.tsx
+│
+├── lib
+│   ├── prisma.ts
+│   ├── noticeSchema.ts
+│   └── validation.ts
+│
+├── pages
+│   ├── api
+│   │   └── notices
+│   │       ├── index.ts
+│   │       └── [id].ts
+│   │
+│   ├── notice
+│   │   ├── add.tsx
+│   │   └── edit
+│   │       └── [id].tsx
+│   │
+│   └── index.tsx
+│
+├── prisma
+│   ├── schema.prisma
+│   └── migrations
+│
+├── services
+│   └── notice.service.ts
+│
+└── types
+```
+
+---
+
+# 🗄 Database Schema
+
+| Field | Type |
+|--------|------|
+| id | String |
+| title | String |
+| body | String |
+| category | EXAM / EVENT / GENERAL |
+| priority | NORMAL / URGENT |
+| publishDate | DateTime |
+| image | String (Optional) |
+| createdAt | DateTime |
+| updatedAt | DateTime |
+
+---
+
+# 📌 API Endpoints
+
+## Get All Notices
+
+```
+GET /api/notices
+```
+
+---
+
+## Create Notice
+
+```
+POST /api/notices
+```
+
+---
+
+## Get Single Notice
+
+```
+GET /api/notices/:id
+```
+
+---
+
+## Update Notice
+
+```
+PUT /api/notices/:id
+```
+
+---
+
+## Delete Notice
+
+```
+DELETE /api/notices/:id
+```
+
+---
+
+# ⚙️ Installation
+
+Clone the repository
+
+```bash
+git clone https://github.com/your-username/notice-board.git
+```
+
+Move into the project
+
+```bash
+cd notice-board
+```
+
+Install dependencies
+
+```bash
+npm install
+```
+
+Create a `.env` file
+
+```env
+DATABASE_URL=your_supabase_database_url
+```
+
+Generate Prisma Client
+
+```bash
+npx prisma generate
+```
+
+Run migrations
+
+```bash
+npx prisma migrate dev
+```
+
+Start the development server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+# 🧪 Validation
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+Client-side validation is implemented using:
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+- React Hook Form
+- Zod
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Server-side validation is performed before creating or updating notices.
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+# 🎨 UI Highlights
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+- Responsive Layout
+- Modern Card Design
+- Delete Confirmation Modal
+- Loading Spinner
+- Skeleton Loading
+- Toast Notifications
+- Reusable Form Component
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+# 🔮 Future Improvements
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Authentication & Authorization
+- Search & Filter
+- Pagination
+- Image Upload
+- Rich Text Editor
+- Dark Mode
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+---
+
+# 📸 Screenshots
+
+Add screenshots here after deployment.
+
+Example:
+
+- Home Page
+- Add Notice
+- Edit Notice
+- Delete Confirmation
+
+---
+
+# 👨‍💻 Author
+
+**Shivam Yadav**
+
+GitHub: https://github.com/your-username
+
+LinkedIn: https://linkedin.com/in/your-linkedin
