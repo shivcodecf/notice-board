@@ -5,6 +5,7 @@ import { Notice } from "@/types/notice";
 import Link from "next/link";
 import DeleteModal from "@/components/DeleteModal";
 import toast from "react-hot-toast";
+import SkeletonCard from "@/components/SkeletonCard";
 
 export default function Home() {
   const [notices, setNotices] = useState<Notice[]>([]);
@@ -30,35 +31,48 @@ export default function Home() {
   };
 
   const handleDelete = async () => {
-  if (!selectedNotice) return;
+    if (!selectedNotice) return;
 
-  try {
-    setDeleteLoading(true);
+    try {
+      setDeleteLoading(true);
 
-    await axios.delete(`/api/notices/${selectedNotice.id}`);
+      await axios.delete(`/api/notices/${selectedNotice.id}`);
 
-    setNotices((prev) =>
-      prev.filter(
-        (notice) => notice.id !== selectedNotice.id
-      )
-    );
+      setNotices((prev) =>
+        prev.filter((notice) => notice.id !== selectedNotice.id),
+      );
 
-    toast.success("Notice deleted successfully");
+      toast.success("Notice deleted successfully");
 
-    setIsDeleteOpen(false);
-    setSelectedNotice(null);
-  } catch (error) {
-    console.error(error);
-    toast.error("Failed to delete notice");
-  } finally {
-    setDeleteLoading(false);
-  }
-};
+      setIsDeleteOpen(false);
+      setSelectedNotice(null);
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to delete notice");
+    } finally {
+      setDeleteLoading(false);
+    }
+  };
 
   if (loading) {
     return (
-      <div className="min-h-screen flex justify-center items-center">
-        <h1 className="text-xl font-semibold">Loading...</h1>
+      <div className="min-h-screen bg-gray-100">
+        <div className="max-w-6xl mx-auto py-10 px-5">
+          <div className="flex justify-between items-center mb-8">
+            <div>
+              <div className="h-10 w-56 bg-gray-300 rounded animate-pulse"></div>
+              <div className="h-4 w-64 bg-gray-200 rounded mt-3 animate-pulse"></div>
+            </div>
+
+            <div className="h-12 w-36 bg-gray-300 rounded-lg animate-pulse"></div>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {Array.from({ length: 6 }).map((_, index) => (
+              <SkeletonCard key={index} />
+            ))}
+          </div>
+        </div>
       </div>
     );
   }
@@ -106,15 +120,15 @@ export default function Home() {
       </div>
 
       <DeleteModal
-  open={isDeleteOpen}
-  title={selectedNotice?.title || ""}
-  loading={deleteLoading}
-  onClose={() => {
-    setIsDeleteOpen(false);
-    setSelectedNotice(null);
-  }}
-  onDelete={handleDelete}
-/>
+        open={isDeleteOpen}
+        title={selectedNotice?.title || ""}
+        loading={deleteLoading}
+        onClose={() => {
+          setIsDeleteOpen(false);
+          setSelectedNotice(null);
+        }}
+        onDelete={handleDelete}
+      />
     </div>
   );
 }

@@ -63,7 +63,33 @@ export default function DeleteModal({
     min-w-[110px]
   "
           >
-            {loading ? "Deleting..." : "Delete"}
+            {loading ? (
+              <div className="flex items-center justify-center gap-2">
+                <svg
+                  className="animate-spin h-4 w-4"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                >
+                  <circle
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="3"
+                    className="opacity-25"
+                  />
+                  <path
+                    d="M22 12a10 10 0 0 1-10 10"
+                    stroke="currentColor"
+                    strokeWidth="3"
+                    className="opacity-75"
+                  />
+                </svg>
+                Deleting...
+              </div>
+            ) : (
+              "Delete"
+            )}
           </button>
         </div>
       </div>

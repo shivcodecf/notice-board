@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { NoticeFormData, noticeSchema } from "@/lib/noticeSchema";
+import toast from "react-hot-toast";
 
 interface NoticeFormProps {
   initialData?: NoticeFormData;
@@ -34,19 +35,21 @@ export default function NoticeForm({
   });
 
   const onSubmit = async (data: NoticeFormData) => {
-    try {
-      if (isEdit) {
-        await axios.put(`/api/notices/${noticeId}`, data);
-      } else {
-        await axios.post("/api/notices", data);
-      }
-
-      await router.push("/");
-    } catch (error) {
-      console.error(error);
-      alert("Something went wrong!");
+  try {
+    if (isEdit) {
+      await axios.put(`/api/notices/${noticeId}`, data);
+      toast.success("Notice updated successfully");
+    } else {
+      await axios.post("/api/notices", data);
+      toast.success("Notice created successfully");
     }
-  };
+
+    await router.push("/");
+  } catch (error) {
+    console.error(error);
+    toast.error("Something went wrong!");
+  }
+};
 
   return (
     <div className="max-w-2xl mx-auto bg-white rounded-xl shadow-lg p-8">
@@ -159,8 +162,14 @@ export default function NoticeForm({
         <div className="flex justify-end gap-4">
           <button
             type="button"
-            onClick={() => router.push("/")}
-            className="px-5 py-3 rounded-lg border hover:bg-gray-100 transition"
+            disabled={isSubmitting}
+            onClick={() => router.back()}
+            className="
+    px-5 py-3 rounded-lg border
+    hover:bg-gray-100
+    disabled:opacity-50
+    disabled:cursor-not-allowed
+  "
           >
             Cancel
           </button>
@@ -170,11 +179,35 @@ export default function NoticeForm({
             disabled={isSubmitting}
             className="px-5 py-3 rounded-lg bg-blue-600 text-white hover:bg-blue-700 disabled:bg-gray-400 transition"
           >
-            {isSubmitting
-              ? "Saving..."
-              : isEdit
-                ? "Update Notice"
-                : "Save Notice"}
+            {isSubmitting ? (
+              <div className="flex items-center justify-center gap-2">
+                <svg
+                  className="animate-spin h-5 w-5"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                >
+                  <circle
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="3"
+                    className="opacity-25"
+                  />
+                  <path
+                    d="M22 12a10 10 0 0 1-10 10"
+                    stroke="currentColor"
+                    strokeWidth="3"
+                    className="opacity-75"
+                  />
+                </svg>
+                Saving...
+              </div>
+            ) : isEdit ? (
+              "Update Notice"
+            ) : (
+              "Save Notice"
+            )}
           </button>
         </div>
       </form>
