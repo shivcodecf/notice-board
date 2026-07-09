@@ -250,7 +250,7 @@ Server-side validation is performed before creating or updating notices.
 
 ## Home Page
 
-c:\Users\shivam\AppData\Local\Packages\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\TempState\ScreenClip\{EF5E330B-0ED2-444F-9316-E6C9EFCD5CAD}.png
+![Home Page](./screenshots/home.png)
 
 ---
 
