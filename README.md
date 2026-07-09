@@ -14,7 +14,7 @@ The application allows administrators to create, update, delete, and manage noti
 
 ## 📂 GitHub Repository
 
-https://github.com/your-username/notice-board
+https://github.com/shivcodecf/notice-board.git
 
 ---
 
@@ -252,6 +252,6 @@ Example:
 
 **Shivam Yadav**
 
-GitHub: https://github.com/your-username
+GitHub: https://github.com/shivcodecf
 
-LinkedIn: https://linkedin.com/in/your-linkedin
+LinkedIn: https://www.linkedin.com/in/shivam-yadav-620a03232/
