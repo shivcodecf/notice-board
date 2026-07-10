@@ -8,7 +8,7 @@ The application allows administrators to create, update, delete, and manage noti
 
 ## 🚀 Live Demo
 
-**Frontend & Backend:** https://notice-board-rkhvah7yx-shivcodecfs-projects.vercel.app
+**Frontend & Backend:** https://notice-board-opal-pi.vercel.app
 
 ---
 
