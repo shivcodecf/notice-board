@@ -37,7 +37,7 @@ export default function EditNotice() {
 
   return (
     <div className="p-10">
-      <h1 className="text-3xl font-bold">Edit Notice</h1>
+      {/* <h1 className="text-3xl font-bold">Edit Notice</h1> */}
 
       <NoticeForm
         initialData={{

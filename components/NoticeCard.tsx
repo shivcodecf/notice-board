@@ -49,7 +49,12 @@ export default function NoticeCard({ notice, onDelete }: Props) {
           <div className="flex items-center gap-1">
             <CalendarDaysIcon className="h-4 w-4" />
 
-            {new Date(notice.publishDate).toLocaleDateString()}
+            {new Date(notice.publishDate).toLocaleDateString("en-GB", {
+              day: "numeric",
+              month: "long",
+              year: "numeric",
+            })}
+            
           </div>
         </div>
       </div>
