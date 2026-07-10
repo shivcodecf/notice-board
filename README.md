@@ -14,7 +14,7 @@ The application allows administrators to create, update, delete, and manage noti
 
 ## 📂 GitHub Repository
 
-https://github.com/shivcodecf/notice-board.git
+https://github.com/shivcodecf/notice-board
 
 ---
 
@@ -160,7 +160,7 @@ DELETE /api/notices/:id
 Clone the repository
 
 ```bash
-git clone https://github.com/shivcodecf/notice-board
+git clone https://github.com/shivcodecf/notice-board.git
 ```
 
 Move into the project
