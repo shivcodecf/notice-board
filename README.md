@@ -8,7 +8,7 @@ The application allows administrators to create, update, delete, and manage noti
 
 ## 🚀 Live Demo
 
-**Frontend:** https://notice-board-rkhvah7yx-shivcodecfs-projects.vercel.app
+**Frontend & Backend:** https://notice-board-rkhvah7yx-shivcodecfs-projects.vercel.app
 
 ---
 
@@ -243,6 +243,21 @@ Server-side validation is performed before creating or updating notices.
 - Image Upload
 - Rich Text Editor
 - Dark Mode
+
+---
+
+# 🤖 AI Usage
+
+AI was used as a development assistant during this project.
+
+It helped with:
+
+- Discussing implementation approaches.
+- Reviewing code structure and suggesting improvements.
+- Explaining framework concepts (Next.js, Prisma, TypeScript).
+- Improving UI/UX ideas and README formatting.
+
+All application architecture, implementation, debugging, testing, and final code review were completed and verified by me.
 
 ---
 
